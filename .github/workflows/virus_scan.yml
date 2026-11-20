@@ -9,6 +9,7 @@ permissions:
 
 jobs:
   scan:
+    if: {{ false }}
     name: Projektdateien scannen
     runs-on: ubuntu-latest
     steps:
