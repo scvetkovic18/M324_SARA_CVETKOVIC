@@ -1,1 +1,36 @@
+name: Exercise 11 CI
 
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality-checks:
+    name: Check code quality
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Exercise2
+    steps:
+      - name: Get the repository files
+        uses: actions/checkout@<CHECKOUT_SHA>
+
+      - name: Prepare Node.js
+        uses: actions/setup-node@<SETUP_NODE_SHA>
+        with:
+          node-version: '22'
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Check lint rules
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Run tests
+        run: npm test
