@@ -1,0 +1,12 @@
+name: Record wiki changes
+on: gollum
+permissions: {}
+
+jobs:
+  wiki-summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List changed wiki pages
+        run: |
+          jq -r '.pages[] | "- \(.action): \(.page_name)"' \
+            "$GITHUB_EVENT_PATH" >> "$GITHUB_STEP_SUMMARY"
