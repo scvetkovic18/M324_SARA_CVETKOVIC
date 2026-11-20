@@ -3,6 +3,9 @@ name: Exercise 11 CI
 on:
   pull_request:
     branches: [main]
+  schedule:
+    - cron: '15 6 * * 1'
+  workflow_dispatch:
 
 permissions:
   contents: read
